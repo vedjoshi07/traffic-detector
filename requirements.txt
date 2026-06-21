@@ -1,6 +1,6 @@
 ultralytics
 supervision
-opencv-python
+opencv-python-headless
 streamlit
 plotly
 pandas
