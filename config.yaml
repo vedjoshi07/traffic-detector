@@ -1,0 +1,21 @@
+model:
+  weights: models/yolov8n.pt
+  confidence: 0.35
+  device: auto          # auto | cpu | cuda | mps
+  classes: [2, 3, 5, 7]  # COCO: car, motorcycle, bus, truck
+
+video:
+  default_source: data/sample.mp4
+  process_every_n_frames: 2
+
+zones_path: data/zones.json
+log_path: data/density_log.csv
+
+density_thresholds:
+  medium: 5      # >= this count -> MEDIUM
+  high: 10       # >= this count -> HIGH
+
+hysteresis_frames: 5   # must hold new level for N consecutive frames before switching (prevents flicker)
+
+alert_on_level: HIGH
+alert_sound: assets/alert.mp3

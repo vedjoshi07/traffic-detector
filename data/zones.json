@@ -1,0 +1,36 @@
+{
+  "zones": [
+    {
+      "id": "lane_left",
+      "name": "Lane Left",
+      "polygon": [
+        [0, 360],
+        [426, 360],
+        [426, 720],
+        [0, 720]
+      ]
+    },
+    {
+      "id": "lane_center",
+      "name": "Lane Center",
+      "polygon": [
+        [426, 360],
+        [853, 360],
+        [853, 720],
+        [426, 720]
+      ]
+    },
+    {
+      "id": "lane_right",
+      "name": "Lane Right",
+      "polygon": [
+        [853, 360],
+        [1280, 360],
+        [1280, 720],
+        [853, 720]
+      ]
+    }
+  ],
+  "frame_width": 1280,
+  "frame_height": 720
+}

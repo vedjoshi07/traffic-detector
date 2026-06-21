@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.env
+venv/
+.venv/
+env/
+
+# Data and models
+models/*.pt
+data/*.mp4
+data/*.avi
+data/*.mov
+data/uploads/
+data/density_log.csv
