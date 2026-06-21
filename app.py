@@ -17,17 +17,20 @@ st.set_page_config(page_title="Traffic Density Estimator", layout="wide", page_i
 # ---- MODEL CHECK ----
 @st.cache_resource
 def ensure_default_model():
-    """Verify yolov8n.pt is present in models/. If missing, show a friendly error."""
+    """Verify yolov8n.pt is present in models/. If missing, download it."""
+    import urllib.request
     model_path = Path("models/yolov8n.pt")
     if not model_path.exists():
-        st.error(
-            "⚠️ Model not found: `models/yolov8n.pt`\n\n"
-            "Run this command to download it:\n```bash\n"
-            "python3 -c \"import ssl,urllib.request,certifi; "
-            "urllib.request.urlopen('https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov8n.pt', "
-            "context=ssl.create_default_context(cafile=certifi.where())).read()\"\n```"
-        )
-        st.stop()
+        model_path.parent.mkdir(parents=True, exist_ok=True)
+        url = "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov8n.pt"
+        try:
+            urllib.request.urlretrieve(url, str(model_path))
+        except Exception:
+            # Fallback for macOS Python lacking SSL certificates
+            import ssl
+            ctx = ssl._create_unverified_context()
+            with urllib.request.urlopen(url, context=ctx) as resp, open(str(model_path), "wb") as f:
+                f.write(resp.read())
     return str(model_path)
 
 ensure_default_model()
