@@ -157,9 +157,12 @@ class Pipeline(threading.Thread):
                 triggered_alerts = alert_manager.get_and_clear_just_triggered()
                 active_alerts = alert_manager.get_active_alerts()
 
+                # Compress to JPEG to save Streamlit/WebSocket bandwidth
+                _, buffer = cv2.imencode('.jpg', annotated_frame, [cv2.IMWRITE_JPEG_QUALITY, 80])
+
                 # Push to queue (drop if full to avoid lag)
                 state = {
-                    "frame": annotated_frame,
+                    "frame_jpg": buffer.tobytes(),
                     "zone_states": zone_states,
                     "triggered_alerts": triggered_alerts,
                     "active_alerts": active_alerts

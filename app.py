@@ -162,8 +162,8 @@ with tab_dashboard:
                     st.session_state.running = False
                     break
                     
-                if "frame" in data:
-                    video_placeholder.image(data["frame"], channels="BGR", use_container_width=True)
+                if "frame_jpg" in data:
+                    video_placeholder.image(data["frame_jpg"], use_container_width=True)
                     
                 if "zone_states" in data:
                     with gauges_placeholder.container():
